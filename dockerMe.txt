@@ -1,0 +1,14 @@
+
+echo http://localhost:8006/
+
+
+docker run -it --name chromeos \
+  -e "VERSION=stable" -e KEEP_AWAKE="Y"  \
+  -p 8006:8006 \
+  --device=/dev/dri \
+ --device=/dev/kvm \
+  --device=/dev/net/tun \
+  --cap-add NET_ADMIN \
+  -v "${PWD:-.}/chromeos:/storage" \
+  --stop-timeout 120 \
+  docker.io/dockurr/chromeos

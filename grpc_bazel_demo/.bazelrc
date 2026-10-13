@@ -1,0 +1,56 @@
+common --enable_bzlmod
+common --cxxopt=-std=c++17
+test --test_output=errors
+
+# Compilador
+build --repo_env=CC=clang
+test  --repo_env=CC=clang
+
+# Avisos do BoringSSL/glibc (apenas os que o Clang entende)
+build --copt=-Wno-incompatible-pointer-types-discards-qualifiers
+test  --copt=-Wno-incompatible-pointer-types-discards-qualifiers
+build --copt=-Wno-unknown-warning-option
+test  --copt=-Wno-unknown-warning-option
+
+# ---------------------------------------------------------------------------
+# Sanitizers
+# ---------------------------------------------------------------------------
+
+# AddressSanitizer (memória: buffer overflow, use-after-free, leaks)
+build:asan --strip=never
+build:asan --copt=-fsanitize=address
+build:asan --copt=-fno-omit-frame-pointer
+build:asan --copt=-O1
+build:asan --copt=-g
+build:asan --linkopt=-fsanitize=address
+
+# UndefinedBehaviorSanitizer (comportamento indefinido: overflow, shift, etc.)
+build:ubsan --strip=never
+build:ubsan --copt=-fsanitize=undefined
+build:ubsan --copt=-fno-omit-frame-pointer
+build:ubsan --copt=-O1
+build:ubsan --copt=-g
+build:ubsan --linkopt=-fsanitize=undefined
+
+# ASan + UBSan juntos (recomendado para debug geral)
+build:asan_ubsan --strip=never
+build:asan_ubsan --copt=-fsanitize=address,undefined
+build:asan_ubsan --copt=-fno-omit-frame-pointer
+build:asan_ubsan --copt=-O1
+build:asan_ubsan --copt=-g
+build:asan_ubsan --linkopt=-fsanitize=address,undefined
+
+# ThreadSanitizer (data races)
+build:tsan --strip=never
+build:tsan --copt=-fsanitize=thread
+build:tsan --copt=-fno-omit-frame-pointer
+build:tsan --copt=-O1
+build:tsan --copt=-g
+build:tsan --linkopt=-fsanitize=thread
+
+# Config para CI (mais verboso, sem cores)
+build:ci --color=no
+build:ci --curses=no
+build:ci --verbose_failures
+test:ci --test_output=errors
+test:ci --test_summary=detailed

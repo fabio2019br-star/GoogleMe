@@ -1,0 +1,2 @@
+which bazel
+bazel --version

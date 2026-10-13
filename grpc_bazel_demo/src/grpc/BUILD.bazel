@@ -1,0 +1,22 @@
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+cc_library(
+    name = "echo_service_grpc",
+    srcs = [
+        "echo_service_grpc.cc",
+        "status_mapping.cc",
+    ],
+    hdrs = [
+        "echo_service_grpc.h",
+        "status_mapping.h",
+    ],
+    includes = ["."],
+    deps = [
+        "//proto:echo_cc_grpc",
+        "//proto:echo_cc_proto",
+        "//src/logic:echo_logic",
+        "@abseil-cpp//absl/status",
+        "@abseil-cpp//absl/status:statusor",
+    ],
+    visibility = ["//visibility:public"],
+)

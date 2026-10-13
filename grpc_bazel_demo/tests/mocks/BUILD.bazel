@@ -1,0 +1,12 @@
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+cc_library(
+    name = "echo_logic_mock",
+    hdrs = ["echo_logic_mock.h"],
+    includes = ["."],
+    deps = [
+        "//src/logic:echo_logic",
+        "@googletest//:gtest",
+    ],
+    visibility = ["//visibility:public"],
+)

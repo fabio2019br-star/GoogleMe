@@ -1,0 +1,12 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary")
+
+cc_binary(
+    name = "server",
+    srcs = ["main.cc"],
+    deps = [
+        "//src/grpc:echo_service_grpc",
+        "//src/logic:echo_logic",
+        "@grpc//:grpc++",
+        "@grpc//:grpc++_reflection",
+    ],
+)

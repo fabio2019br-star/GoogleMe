@@ -1,0 +1,26 @@
+load("@rules_cc//cc:defs.bzl", "cc_test")
+
+cc_test(
+    name = "status_mapping_test",
+    srcs = ["status_mapping_test.cc"],
+    deps = [
+        "//src/grpc:echo_service_grpc",
+        "@abseil-cpp//absl/status",
+        "@googletest//:gtest_main",
+        "@grpc//:grpc++",
+        "@grpc//:grpc",
+    ],
+)
+
+cc_test(
+    name = "echo_service_grpc_test",
+    srcs = ["echo_service_grpc_test.cc"],
+    deps = [
+        "//src/grpc:echo_service_grpc",
+        "//tests/mocks:echo_logic_mock",
+        "@abseil-cpp//absl/status",
+        "@googletest//:gtest_main",
+        "@grpc//:grpc++",
+        "@grpc//:grpc",
+    ],
+)

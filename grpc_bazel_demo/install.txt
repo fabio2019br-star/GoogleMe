@@ -1,0 +1,18 @@
+sudo apt update && sudo apt install -y \
+    build-essential \
+    gdb \
+    clang \
+    libstdc++-12-dev \
+    htop \
+    vim-gtk3 \
+    curl \
+    git \
+    gnupg \
+    apt-transport-https \
+    libgrpc++-dev \
+    libprotobuf-dev \
+    protobuf-compiler \
+    protobuf-compiler-grpc \
+    googletest \
+    cloud-guest-utils \
+    ncdu

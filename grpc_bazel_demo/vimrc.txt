@@ -1,0 +1,44 @@
+set nu 
+set clipboard=unnamedplus
+
+
+syntax on
+filetype plugin indent on
+
+set tabstop=4          " Tab exibido como 4 espaços
+set shiftwidth=4       " Autoindent usa 4 espaços
+set softtabstop=4      " Tab "sente" como 4 espaços
+set expandtab          " Converte Tab em espaços
+set autoindent         " Mantém indentação da linha anterior
+set smartindent        " Indentação inteligente para blocos
+
+" --- Comprimento de linha (PEP 8: 79 caracteres) ---
+set textwidth=79       " Quebra linha automaticamente em 79 chars
+set colorcolumn=79     " Destaca a coluna 79
+
+" --- Espaços em branco ruins ---
+highlight BadWhitespace ctermbg=red guibg=red
+" Marca Tab no início da linha como ruim (PEP 8 prefere espaços)
+autocmd BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
+" Marca espaços no final da linha como ruins
+autocmd BufRead,BufNewFile *.py,*.pyw,*.py,*.pyw match BadWhitespace /\s\+$/
+
+" --- Fim de linha Unix ---
+autocmd BufNewFile *.py,*.pyw set fileformat=unix
+
+" --- Aparência ---
+set number             " Números de linha
+set relativenumber     " Números relativos
+set showmatch          " Destaca parênteses correspondentes
+set cursorline         " Destaca linha atual
+set ruler              " Mostra linha/coluna no rodapé
+set laststatus=2       " Sempre mostra barra de status
+
+" --- Busca ---
+set ignorecase         " Busca ignora maiúsculas/minúsculas
+set smartcase          " Se usar maiúsculas, busca é sensível
+set incsearch          " Busca incremental
+set hlsearch           " Destaca resultados
+
+" --- Atalho para limpar destaque da busca ---
+nnoremap <SPACE> :nohlsearch<CR>
